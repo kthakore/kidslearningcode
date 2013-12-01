@@ -5,8 +5,73 @@
     <script src="libs/jquery-1.10.2.min.js"> </script>
   </head>
   <body>
+    <div id="scoreBoard">
+        <div>Score: <span id="score">0</span></div>
+        <div>Level: <span id="level">0</span></div>
+    </div>
+   <img src="img/ship.png" id="ship"/> 
+   <img src="img/enemy.png" id="enemy"/> 
+   <img src="img/laser.png" id="laser"/> 
 
+  
+  <script>
+    var $sh = $('#ship'),
+		$laser = $('#laser'),
+		$enemy = $('#enemy'),
+		laserShooting = false;
 
+		
+	function shootLaser (left) { // The left is the right position for the laser
+		laserShooting = true;
+		$laser.css({"left" : left + 'px'}); 
+		var bottom = 60; 
+		$laser.css ({"bottom" : bottom + 'px' });
+		// Show the S 
+		$laser.css({"display" : "block"}); // showing the laser
+		
+		var enemyheight = parseInt($enemy.css('height'), 10);
+		$laser.animate({"bottom" : window.innerHeight + 'px' }, //Properties
+				{ "step" : function (laserTop) { 
+				 var enemyleft=parseInt($enemy.css('left'), 10);
+				 var laserleft=parseInt($laser.css('left'), 10);
+				 
+				 //
+				 console.log(window.innerHeight, enemyheight, laserTop);
+				 // IF THE Enemy's left is the same as the laser then the enemy shit got hit
+				 if ( ((enemyleft - laserleft) <30) && laserTop > (window.innerHeight - enemyheight) ) {
+						var score = parseInt($('#score').text(), 10);
+						score += 10;
+						$('#score').text(score);
+						$laser.css({"display" : "none"}); // showing the laser
+				 }
+				
+				},
+				 "duration" : 'slow', //Duration
+				 "easing" : 'swing', //Easing
+				 "complete" : function () { laserShooting = false; } //complete
+				}
+				);
 
-  </body>
+	}
+		
+    $(window).keydown(function(event) {  
+                var left = parseInt($sh.css('left'), 10),
+                    key = event.keyCode; 
+                if (key == 65 ) { // right: D
+                    left -= 5;
+                } if (key == 68 ) { // left: A
+                    left += 5;
+                }
+				if (key == 32 && laserShooting == false) { // space shoot LASER!
+					shootLaser(left);
+				}
+				
+                    $sh.css({"left" : left + 'px' });
+
+//                event.preventDefault(); 
+            });
+			
+
+  </script>
+  </body>  
 </html>
