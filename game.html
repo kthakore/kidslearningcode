@@ -36,9 +36,9 @@
 				 var laserleft=parseInt($laser.css('left'), 10);
 				 
 				 //
-				 console.log(window.innerHeight, enemyheight, laserTop);
+				 
 				 // IF THE Enemy's left is the same as the laser then the enemy shit got hit
-				 if ( ((enemyleft - laserleft) <30) && laserTop > (window.innerHeight - enemyheight) ) {
+				 if ( ( Math.abs(enemyleft - laserleft) <30) && laserTop > (window.innerHeight - enemyheight) ) {
 						var score = parseInt($('#score').text(), 10);
 						score += 10;
 						$('#score').text(score);
@@ -71,7 +71,28 @@
 //                event.preventDefault(); 
             });
 			
-
+	function getEnemyNewLeftLocation() {
+		var randDirection = ( Math.random() - Math.random()) * 500;
+		var enemyleft=parseInt($enemy.css('left'), 10);
+		var newPosition = enemyleft + randDirection;
+		if (newPosition < 0 || newPosition > window.innerWidth) {
+			return getEnemyNewLeftLocation();
+		}
+		return randDirection;
+	}
+	//MATH RANDOM
+	//$enemy.css({"left" : Math.random() * window.innerWidth});
+	//Use 
+	function moveEnemy() {
+		$enemy.animate({"left" : "+=" + getEnemyNewLeftLocation()},
+		{
+		"duration" : 600, //Duration 
+		"easing" : 'swing', //Easing
+		"complete" : function () {moveEnemy();}
+		});
+	}
+	
+	moveEnemy();
   </script>
   </body>  
 </html>
