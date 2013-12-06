@@ -6,8 +6,9 @@
   </head>
   <body>
     <div id="scoreBoard">
+        <div>High Score: <span id="high score">0</span></div>
         <div>Score: <span id="score">0</span></div>
-        <div>Level: <span id="level">0</span></div>
+		<div>Level: <span id="level">0</span></div>
     </div>
    <img src="img/ship.png" id="ship"/> 
    <img src="img/enemy.png" id="enemy"/> 
@@ -37,7 +38,7 @@
 				 
 				 //
 				 
-				 // IF THE Enemy's left is the same as the laser then the enemy shit got hit
+				 // IF THE Enemy's left is the same as the laser then the enemy ship got hit
 				 if ( ( Math.abs(enemyleft - laserleft) <30) && laserTop > (window.innerHeight - enemyheight) ) {
 						var score = parseInt($('#score').text(), 10);
 						score += 10;
@@ -46,7 +47,7 @@
 				 }
 				
 				},
-				 "duration" : 'slow', //Duration
+				 "duration" : 'medium', //Duration
 				 "easing" : 'swing', //Easing
 				 "complete" : function () { laserShooting = false; } //complete
 				}
@@ -58,9 +59,9 @@
                 var left = parseInt($sh.css('left'), 10),
                     key = event.keyCode; 
                 if (key == 65 ) { // right: D
-                    left -= 5;
+                    left -= 20;
                 } if (key == 68 ) { // left: A
-                    left += 5;
+                    left += 20;
                 }
 				if (key == 32 && laserShooting == false) { // space shoot LASER!
 					shootLaser(left);
@@ -91,8 +92,8 @@
 		"complete" : function () {moveEnemy();}
 		});
 	}
-	
 	moveEnemy();
+	
   </script>
   </body>  
 </html>
