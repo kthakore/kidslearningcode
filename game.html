@@ -3,8 +3,20 @@
   <head>
     <link href="game.css" rel="stylesheet" type="text/css">
     <script src="libs/jquery-1.10.2.min.js"> </script>
+    <script>
+        if (require) {
+            var gui = require('nw.gui');
+            var win = gui.Window.get();
+				
+			$(function() {
+				$closeBtn = $('.close');
+				$closeBtn.on('click', function () {win.close()});
+			});
+        }
+    </script>
   </head>
   <body>
+	<div class="close">X</div>
     <div id="scoreBoard">
         <div>High Score: <span id="high score">0</span></div>
         <div>Score: <span id="score">0</span></div>

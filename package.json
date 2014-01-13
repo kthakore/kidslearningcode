@@ -1,0 +1,12 @@
+{
+  "name": "Lesson 1! Fight",
+  "main": "game.html",
+  "window": {
+    "frame": false,
+    "width": 640,
+    "height": 480,
+    "toolbar": false,
+    "position": "center",
+    "resizable": false
+  }
+}
