@@ -16,6 +16,7 @@ body {
 	z-index: 10px;
 	font-family: sans-serif;
 	color: lime;
+	cursor: pointer;
 }
 
 #scoreBoard {

@@ -1,0 +1,1 @@
+start "Lesson 1 Fight!" "nw.exe" "game.zip"
